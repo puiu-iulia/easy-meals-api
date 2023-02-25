@@ -6,6 +6,7 @@ from django.db import models
 import datetime
 
 from ..models import Meal
+from recipes.models import Recipe
 
 
 class MealPlan(models.Model):
@@ -13,8 +14,8 @@ class MealPlan(models.Model):
     meal_date = models.DateField(
         unique=True, blank=False, default=datetime.datetime.now())
     date = models.DateField()
-    # check if needs cascade deleting
     meals = models.ManyToManyField(Meal, blank=True)
+    recipes = models.ManyToManyField(Recipe, blank=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

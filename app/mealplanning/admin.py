@@ -1,3 +1,5 @@
-from django.contrib import admin
+from .MealPlan.admin import MealPlanAdmin
 
-# Register your models here.
+__all__ = [
+    'MealPlanAdmin'
+]

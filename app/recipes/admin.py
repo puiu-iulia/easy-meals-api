@@ -1,3 +1,11 @@
-from django.contrib import admin
+from .Recipe.admin import RecipeAdmin
+from .Tag.admin import TagAdmin
+from .Ingredient.admin import IngredientAdmin
+from .Step.admin import StepAdmin
 
-# Register your models here.
+__all__ = [
+    'RecipeAdmin',
+    'TagAdmin',
+    'IngredientAdmin',
+    'StepAdmin'
+]

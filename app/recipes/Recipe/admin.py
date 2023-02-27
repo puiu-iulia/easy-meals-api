@@ -4,7 +4,7 @@ from .models import Recipe
 
 
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ['title', 'image']
+    list_display = ['title', 'image', 'user']
 
 
 admin.site.register(Recipe, RecipeAdmin)

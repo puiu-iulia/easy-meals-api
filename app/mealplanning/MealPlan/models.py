@@ -11,9 +11,9 @@ from recipes.models import Recipe
 
 class MealPlan(models.Model):
     """Daily Meal Plan"""
-    meal_date = models.DateField(
-        unique=True, blank=False, default=datetime.datetime.now())
-    date = models.DateField()
+    date = models.DateField(
+        unique=True, blank=False, default=datetime.date.today()
+    )
     meals = models.ManyToManyField(Meal, blank=True)
     recipes = models.ManyToManyField(Recipe, blank=True)
     user = models.ForeignKey(

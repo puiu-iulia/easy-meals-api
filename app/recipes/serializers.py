@@ -1,7 +1,7 @@
 from .Tag.serializers import TagSerializer
 from .Ingredient.serializers import IngredientSerializer
 from .Step.serializers import StepSerializer
-from .Recipe.serializers import RecipeDetailSerializer, RecipeSerializer, RecipeImageSerializer
+from .Recipe.serializers import RecipeDetailSerializer, RecipeSerializer, RecipeImageSerializer, RecipeIdSerializer
 
 __all__ = [
     'TagSerializer',
@@ -10,4 +10,5 @@ __all__ = [
     'RecipeSerializer',
     'RecipeDetailSerializer',
     'RecipeImageSerializer',
+    'RecipeIdSerializer'
 ]

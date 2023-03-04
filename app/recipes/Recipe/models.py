@@ -20,7 +20,7 @@ class Recipe(models.Model):
         on_delete=models.CASCADE,
     )
     title = models.CharField(max_length=255)
-    description = models.CharField(max_length=255, blank=True, null=True),
+    description = models.CharField(max_length=255, blank=True, null=True)
     time_minutes = models.IntegerField(blank=True, null=True)
     link = models.CharField(max_length=90, blank=True, null=True)
     tags = models.ManyToManyField('Tag', blank=True)

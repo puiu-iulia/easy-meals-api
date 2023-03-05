@@ -22,11 +22,14 @@ class MealPlanSerializer(serializers.ModelSerializer):
 
     def _get_recipes(self, recipes, meal_plan):
         auth_user = self.context['request'].user
+        recipe_objs = []
         for recipe in recipes:
-            recipe_objs = Recipe.objects.filter(
+            recipe_obj = Recipe.objects.get(
                 user=auth_user,
-                id=recipe.id,  # Add additional fields as necessary
+                id=recipe.id,
             )
+            if recipe_obj:
+                recipe_objs.append(recipe_obj)
         for recipe_obj in recipe_objs:
             meal_plan.recipes.add(recipe_obj)
 

@@ -9,27 +9,25 @@ from recipes.models import Recipe
 class MealPlanSerializer(serializers.ModelSerializer):
     """Serializer for daily meal plan"""
 
-    recipes = RecipeIdSerializer(many=True)
-
     class Meta:
         model = MealPlan
         fields = ('id', 'date', 'recipes')
 
     def create(self, validated_data):
-        meals = validated_data.pop('meals', [])
         recipes = validated_data.pop('recipes', [])
         meal_plan = MealPlan.objects.create(**validated_data)
-        self._get_or_create_recipes(recipes, meal_plan)
+        self._get_recipes(recipes, meal_plan)
 
         return meal_plan
 
-    def _get_or_create_recipes(self, recipes, meal_plan):
+    def _get_recipes(self, recipes, meal_plan):
         auth_user = self.context['request'].user
         for recipe in recipes:
-            recipe_obj, created = Recipe.objects.get_or_create(
+            recipe_objs = Recipe.objects.filter(
                 user=auth_user,
-                **recipe,
+                id=recipe.id,  # Add additional fields as necessary
             )
+        for recipe_obj in recipe_objs:
             meal_plan.recipes.add(recipe_obj)
 
 

@@ -20,6 +20,17 @@ class MealPlanSerializer(serializers.ModelSerializer):
 
         return meal_plan
 
+    def update(self, instance, validated_data):
+        recipes = validated_data.pop('recipes', [])
+        instance.recipes.clear()
+        self._get_recipes(recipes, instance)
+
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+
+        instance.save()
+        return instance
+
     def _get_recipes(self, recipes, meal_plan):
         auth_user = self.context['request'].user
         recipe_objs = []
